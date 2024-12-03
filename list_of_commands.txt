@@ -1,0 +1,24 @@
+export RL_DATA=/Users/ibk5106/Desktop/IST_courses/TA/wge/data
+export REPO_DIR=/Users/ibk5106/Desktop/IST_courses/TA/wge
+export RL_DEMO_DIR=$REPO_DIR/third-party/miniwob-demos/
+export MINIWOB_BASE_URL='/Users/ibk5106/Desktop/IST_courses/TA/wge/miniwob-sandbox/html'
+export MINIWOB_BASE_URL='http://localhost:8070/'
+
+
+
+pip install Fabric3
+
+pip install tensorflow
+
+pip install line-profiler
+
+
+# conda
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 -c pytorch
+Linux and Windows
+# CUDA 11.6
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
+# CUDA 11.7
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 cpuonly -c pytorch
