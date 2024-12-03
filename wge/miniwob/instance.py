@@ -1,11 +1,11 @@
 import json
 import logging
 import os
-from Queue import Queue
+from queue import Queue
 import sys
 import time
 import traceback
-import urlparse
+import urllib.parse
 from threading import Thread, Event
 
 import numpy as np
@@ -80,14 +80,14 @@ class MiniWoBInstance(Thread):
             assert not base_url.startswith('file://'),\
                     ('For {} domain, MINIWOB_BASE_URL cannot be file://. '
                      ' See "Run a simple server" in README').format(subdomain)
-            self.url = urlparse.urljoin(base_url,
+            self.url = urllib.parse.urljoin(base_url,
                     subdomain.replace('.', '/') + '/wrapper.html')
             self.window_width = self.FLIGHT_WINDOW_WIDTH
             self.window_height = self.FLIGHT_WINDOW_HEIGHT
             self.task_width = self.FLIGHT_TASK_WIDTH
             self.task_height = self.FLIGHT_TASK_HEIGHT
         else:
-            self.url = urlparse.urljoin(base_url,
+            self.url = urllib.parse.urljoin(base_url,
                     'miniwob/{}.html'.format(subdomain))
             self.window_width = self.WINDOW_WIDTH
             self.window_height = self.WINDOW_HEIGHT
@@ -160,7 +160,7 @@ class MiniWoBInstance(Thread):
                     .format(self.window_width, self.window_height))
             options.add_argument('window-position={},{}'
                     .format(9000, 30 + self.index * (self.window_height + 30)))
-        self.driver = webdriver.Chrome(chrome_options=options)
+        self.driver = webdriver.Chrome(options=options)
         self.driver.implicitly_wait(5)
         if self.headless:
             self.driver.get(self.url)
@@ -257,7 +257,7 @@ class MiniWoBInstance(Thread):
         #self.driver.find_element_by_id(self.SYNC_SCREEN_ID).click()
         self.driver.execute_script('core.startEpisodeReal();')
         if self.block_on_reset:
-            for _ in xrange(self.RESET_BLOCK_MAX_ATTEMPT):
+            for _ in range(self.RESET_BLOCK_MAX_ATTEMPT):
                 if self.driver.execute_script('return WOB_TASK_READY;'):
                     break
                 time.sleep(self.RESET_BLOCK_SLEEP_TIME)

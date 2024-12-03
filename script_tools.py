@@ -38,12 +38,12 @@ def upload_code(worksheet, debug=False):
         if repo.is_dirty():
             f.write('dirty repo\n')
 
-    print '\nUploading new source code:'
+    print('\nUploading new source code:')
     up_cmd = ("cl upload -w {} -n wge -x .git docs downloads "
               "launch_jobs.sh LICENSE README.md requirements.txt "
               "script_tools.py venv third-party/miniwob-demos -- .").format(worksheet)
     if debug:
-        print up_cmd
+        print(up_cmd)
     else:
         local(up_cmd)
 
@@ -56,10 +56,10 @@ def upload_demos(worksheet, debug=False):
     make_cmd = 'cl make -w {} -n rl_data glove:glove nltk:nltk demonstrations:demonstrations'.format(
         worksheet)
 
-    print '\nUploading new demonstrations:'
+    print('\nUploading new demonstrations:')
     if debug:
-        print up_cmd
-        print make_cmd
+        print(up_cmd)
+        print(make_cmd)
     else:
         local(up_cmd)
         local(make_cmd)
@@ -83,7 +83,7 @@ def create_worksheet(worksheet):
         # grant permissions
         local('cl wperm {} wge all'.format(worksheet))
 
-        print 'Created worksheet: {}'.format(worksheet)
+        print('Created worksheet: {}'.format(worksheet))
 
 
 miniwob_easy = [

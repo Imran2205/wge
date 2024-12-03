@@ -1,5 +1,5 @@
 from collections import namedtuple
-from itertools import izip
+
 
 import numpy as np
 import torch
@@ -82,7 +82,7 @@ class SequenceBatch(namedtuple('SequenceBatch', ['values', 'mask']), NamedTupleL
         """
         values_list = [v.squeeze(dim=1) for v in self.values.split(1, dim=1)]
         mask_list = self.mask.split(1, dim=1)
-        return [SequenceBatchElement(v, m) for v, m in izip(values_list, mask_list)]
+        return [SequenceBatchElement(v, m) for v, m in zip(values_list, mask_list)]
 
     @classmethod
     def cat(cls, elements):
@@ -171,7 +171,9 @@ class SequenceBatch(namedtuple('SequenceBatch', ['values', 'mask']), NamedTupleL
             if (sums.data == 0).any():
                 raise ValueError("Averaging zero elements.")
 
-        weights = mask / sums.expand(*mask.size())
+        # print(mask.size(), sums.size())
+        # weights = mask / sums.expand(*mask.size())
+        weights = mask / sums.unsqueeze(1)
         return cls.weighted_sum(seq_batch, weights)
 
     @classmethod

@@ -7,6 +7,7 @@ from pyhocon import ConfigFactory
 
 from gtd.io import makedirs
 from wge.miniwob.trace import MiniWoBEpisodeTrace
+import torch
 
 
 AVG_REWARD = 'avg_reward'
@@ -35,7 +36,7 @@ class Stat(object):
             targets = [round(0.1 * i, 1) for i in range(-10, 11, 1)]
         elif stat_type == AVG_EP_LENGTH:
             ascending = False
-            targets = range(10)
+            targets = list(range(10))
         elif stat_type == REPLAY_BUFFER_SIZE:
             ascending = True
             # [100, 200, ..., 1000]
@@ -104,7 +105,7 @@ class Stat(object):
         d = self.to_json_dict()
         # need to convert hit_times to (key, value) pairs,
         # since a float can't be a key in HOCON format
-        items = d['hit_times'].items()
+        items = list(d['hit_times'].items())
         items = sorted(items, reverse=True)
         items = [list(item) for item in items]  # json doesn't like tuples
         d['hit_times'] = items
@@ -163,9 +164,24 @@ class EpisodeLogger(object):
 
         episode_traces = [MiniWoBEpisodeTrace(ep) for ep in episodes]
 
+        def convert_to_serializable(obj):
+            if isinstance(obj, (np.floating, np.float32, np.float64)):
+                return float(obj)
+            if isinstance(obj, np.ndarray):
+                return obj.tolist()
+            if isinstance(obj, torch.Tensor):
+                return obj.item() if obj.numel() == 1 else obj.tolist()
+            if isinstance(obj, dict):
+                return {key: convert_to_serializable(value) for key, value in obj.items()}
+            if isinstance(obj, (list, tuple)):
+                return [convert_to_serializable(item) for item in obj]
+            return obj
+
         # save machine-readable version
         with open(trace_path + '.json', 'w', 'utf8') as f:
             trace_dicts = [trace.to_json_dict() for trace in episode_traces]
+            # print(trace_dicts)
+            trace_dicts = convert_to_serializable(trace_dicts)
             json.dump(trace_dicts, f, indent=2)
 
         # save pretty-printed version
@@ -204,7 +220,7 @@ class EpisodeLogger(object):
         raw_stats = self._compute_raw_stats(episodes)
 
         meta = self.metadata
-        for stat_type, value in raw_stats.items():
+        for stat_type, value in list(raw_stats.items()):
             # update tboard
             self.tb_logger.log_value('{}_{}'.format(label, stat_type),
                                      value=value, step=train_step)
