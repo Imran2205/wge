@@ -17,15 +17,7 @@ flight from San Francisco to New York for Dec 23rd."
 ## Setup
 
 ### General setup
-- Python 
-  - Create a conda environment with Python v3.8
-  ```shell
-  conda create -n wge python=3.8
-  ```
-  - Activate the conda environment
-  ```shell
-  conda activate wge
-  ```
+
 - Python dependencies
   ```
   pip install -r requirements.txt
@@ -34,44 +26,23 @@ flight from San Francisco to New York for Dec 23rd."
   flag.
 
 - Node and npm
-  - Make sure Node and npm are installed. If they 
+  - Make sure Node and npm are installed via ```brew install node```. If they 
   are, ```node -v``` and ```npm -v``` should print version numbers.
-  - To install Node and npm in OSX use
-    ```shell
-    brew install node
-    ```
-    - If brew is not installed, please follow the installation instructions on [brew website](https://brew.sh/).
-  - To install Node and npm on Linux machines use
-    ```shell
-    sudo apt install nodejs
-    sudo apt install npm
-    ```
-  - On Windows, Node and npm can be installed via the prebuilt installer from the [nodejs website](https://nodejs.org/en/download/prebuilt-installer)
+
 - PyTorch
-  - Install [PyTorch v1.13.1](https://pytorch.org/get-started/previous-versions/#v1131). Depending on OS type, use any of the following commands.
-    - OSX
-    ```shell
-    conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 -c pytorch
-    ```
-    - Linux and Windows
-    ```
-    # CUDA 11.6
-    conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
-    # CUDA 11.7
-    conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
-    # CPU Only
-    conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 cpuonly -c pytorch
-    ```
+  - Install [PyTorch v0.1.12](http://pytorch.org/previous-versions/). Newer
+    versions of PyTorch are not backwards compatible.
 
 - Selenium
-  - Install selenium from `conda-forge`
-  ```
-  conda install conda-forge::selenium
-  ```
-  - Alternatively, you can install selenium using `pip`
-  ```
-  pip install selenium
-  ```
+  - Outside this repository, download
+    [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads).
+    Unzip it and then add the directory containing the `chromedriver` executable
+    to the `PATH` environment variable
+    ```
+    export PATH=$PATH:/path/to/chromedriver
+    ```
+  - If instead you're using Anaconda,
+    use ```conda install -c conda-forge selenium```.
 
 ### Data directory setup
 
@@ -88,7 +59,8 @@ flight from San Francisco to New York for Dec 23rd."
   # Download glove from https://nlp.stanford.edu/data/glove.6B.zip and place
   # in current directory however you want
   # Suggested: wget https://nlp.stanford.edu/data/glove.6B.zip
-  unzip -d glove glove.6B.zip
+  unzip glove.6B.zip
+  mv glove.6B glove
   ```
 
 ### Demonstration directory setup

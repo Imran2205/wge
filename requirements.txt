@@ -5,7 +5,9 @@ Pillow
 selenium
 pytest
 jsonpickle
-Fabric
+Fabric3
+tensorflow
+line-profiler
 futures
 pyhocon
 ipython
