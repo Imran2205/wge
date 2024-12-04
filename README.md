@@ -88,12 +88,13 @@ flight from San Francisco to New York for Dec 23rd."
   # Download glove from https://nlp.stanford.edu/data/glove.6B.zip and place
   # in current directory however you want
   # Suggested: wget https://nlp.stanford.edu/data/glove.6B.zip
-  # If wget is not installed, you can install it on macOS using brew install wget.
+  # If wget is not installed, you can install it on macOS using: brew install wget.
   unzip -d glove glove.6B.zip
   ```
 
 ### Demonstration directory setup
-First, set the environment variable `$REPO_DIR` to point to the root of this Git repository.
+First, set the environment variable `$REPO_DIR` to point to the root of this Git repository. 
+Next, run the following command to download MiniWoB++ Demonstrations to `./third-party/miniwob-demos`:
 ```
 # Where $REPO_DIR is the path to the root of this Git repository.
 git clone https://github.com/stanfordnlp/miniwob-plusplus-demos.git $REPO_DIR/third-party/miniwob-demos
@@ -126,6 +127,14 @@ export RL_DEMO_DIR=$REPO_DIR/third-party/miniwob-demos/
 Follow the "Run a simple server" instruction in the MiniWoB setup section above.
 
 ## Launching an Experiment
+Each time you open a new terminal to run an experiment, set these environment variables:
+
+```shell
+export RL_DATA=/path/to/data
+export REPO_DIR=/path/to/wge/repository
+export RL_DEMO_DIR=$REPO_DIR/third-party/miniwob-demos
+export MINIWOB_BASE_URL='http://localhost:8080/' # replace with your port number
+```
 
 To train a model on a task, run:
 ```
