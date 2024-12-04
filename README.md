@@ -92,7 +92,7 @@ flight from San Francisco to New York for Dec 23rd."
   ```
 
 ### Demonstration directory setup
-
+First, set the environment variable `$REPO_DIR` to point to the root of this Git repository.
 ```
 # Where $REPO_DIR is the path to the root of this Git repository.
 git clone https://github.com/stanfordnlp/miniwob-plusplus-demos.git $REPO_DIR/third-party/miniwob-demos
@@ -102,18 +102,18 @@ export RL_DEMO_DIR=$REPO_DIR/third-party/miniwob-demos/
 ### MiniWoB setup
 
 - There are 2 ways to access MiniWoB tasks:
-  1. **Use the `file://` protocol (Recommended):**
-    Open `miniwob-sandbox/html/` in the browser,
-    and then export the URL to the `MINIWOB_BASE_URL` environment variable:
-    ```
-    export MINIWOB_BASE_URL='file:///path/to/miniwob-sandbox/html/'
-    ```
-  2. **Run a simple server:** go to `miniwob-sandbox/html/` and run the supplied `http-serve`.
+  1. **Run a simple server:** go to `miniwob-sandbox/html/` and run the supplied `http-serve`.
     - The tasks should now be accessible at `http://localhost:8080/miniwob/`
     - To use a different port (say 8765), run `http-serve 8765`, and then
     export the following to the `MINIWOB_BASE_URL` environment variable:
     ```
     export MINIWOB_BASE_URL='http://localhost:8765/'
+    ```
+  2. **Use the `file://` protocol:**
+    Open `miniwob-sandbox/html/` in the browser,
+    and then export the URL to the `MINIWOB_BASE_URL` environment variable:
+    ```
+    export MINIWOB_BASE_URL='file:///path/to/miniwob-sandbox/html/'
     ```
 - Once you've followed one of the steps above, test `MiniWoBEnvironment` by running
   ```
