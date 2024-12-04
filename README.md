@@ -105,18 +105,18 @@ export RL_DEMO_DIR=$REPO_DIR/third-party/miniwob-demos/
 
 - There are 2 ways to access MiniWoB tasks:
   1. **Run a simple server:** go to `miniwob-sandbox/html/` and run the supplied `http-serve`.
-    - The tasks should now be accessible at `http://localhost:8080/miniwob/`
-    - To use a different port (say 8765), run `http-serve 8765`, and then
-    export the following to the `MINIWOB_BASE_URL` environment variable:
-    ```
-    export MINIWOB_BASE_URL='http://localhost:8765/'
-    ```
+     - The tasks should now be accessible at `http://localhost:8080/miniwob/`
+     - To use a different port (say 8765), run `http-serve 8765`, and then
+     export the following to the `MINIWOB_BASE_URL` environment variable:
+     ```
+       export MINIWOB_BASE_URL='http://localhost:8765/'
+     ```
   2. **Use the `file://` protocol:**
     Open `miniwob-sandbox/html/` in the browser,
     and then export the URL to the `MINIWOB_BASE_URL` environment variable:
-    ```
-    export MINIWOB_BASE_URL='file:///path/to/miniwob-sandbox/html/'
-    ```
+       ```
+       export MINIWOB_BASE_URL='file:///path/to/miniwob-sandbox/html/'
+       ```
 - Once you've followed one of the steps above, test `MiniWoBEnvironment` by running
   ```
   pytest wge/tests/miniwob/test_environment.py -s
