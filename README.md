@@ -135,6 +135,9 @@ export REPO_DIR=/path/to/wge/repository
 export RL_DEMO_DIR=$REPO_DIR/third-party/miniwob-demos
 export MINIWOB_BASE_URL='http://localhost:8080/' # replace with your port number
 ```
+Also, the MiniWoB server must be running on the port specified in the `$MINIWOB_BASE_URL` environment variable. 
+If the server isn't running, follow the "Run a simple server" instruction in the MiniWoB setup section above to 
+start it.
 
 To train a model on a task, run:
 ```
