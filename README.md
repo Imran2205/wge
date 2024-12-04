@@ -36,7 +36,7 @@ flight from San Francisco to New York for Dec 23rd."
 - Node and npm
   - Make sure Node and npm are installed. If they 
   are, ```node -v``` and ```npm -v``` should print version numbers.
-  - To install Node and npm in OSX use
+  - To install Node and npm in macOS use
     ```shell
     brew install node
     ```
@@ -49,7 +49,7 @@ flight from San Francisco to New York for Dec 23rd."
   - On Windows, Node and npm can be installed via the prebuilt installer from the [nodejs website](https://nodejs.org/en/download/prebuilt-installer)
 - PyTorch
   - Install [PyTorch v1.13.1](https://pytorch.org/get-started/previous-versions/#v1131). Depending on OS type, use any of the following commands.
-    - OSX
+    - macOS
     ```shell
     conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 -c pytorch
     ```
@@ -88,6 +88,7 @@ flight from San Francisco to New York for Dec 23rd."
   # Download glove from https://nlp.stanford.edu/data/glove.6B.zip and place
   # in current directory however you want
   # Suggested: wget https://nlp.stanford.edu/data/glove.6B.zip
+  # If wget is not installed, you can install it on macOS using brew install wget.
   unzip -d glove glove.6B.zip
   ```
 
