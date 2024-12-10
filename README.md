@@ -119,6 +119,7 @@ $env:RL_DEMO_DIR = "\path\to\wge\third-party\miniwob-demos\"
        # To set envarionment variables in windows powershell use:
        $env:MINIWOB_BASE_URL = "http://localhost:8765/"
      ```
+     
      **N.B. Windows user please use `http-serve.bat` file instead of `http-serve` to run the server**
   2. **Use the `file://` protocol:**
     Open `miniwob-sandbox/html/` in the browser,
