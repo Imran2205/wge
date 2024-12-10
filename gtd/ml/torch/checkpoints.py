@@ -45,8 +45,12 @@ class TrainState(object):
         torch.save(self.optimizer.state_dict(), join(path, 'optimizer'))
 
         # pickle remaining attributes
+        # d = {attr: getattr(self, attr) for attr in ['train_steps', 'random_state', 'max_grad_norm']}
+        # with open(join(path, 'metadata.p'), 'w') as f:
+        #     pickle.dump(d, f)
+
         d = {attr: getattr(self, attr) for attr in ['train_steps', 'random_state', 'max_grad_norm']}
-        with open(join(path, 'metadata.p'), 'w') as f:
+        with open(join(path, 'metadata.p'), 'wb') as f:  # Changed 'w' to 'wb'
             pickle.dump(d, f)
 
     @classmethod

@@ -108,6 +108,7 @@ class MiniWoBTrainingRun(TorchTrainingRun):
         self._replay_logger = ReplayLogger(self.workspace.traces_replay,
                 self.tb_logger, self.metadata)
 
+        print(">>>>>", self.workspace.traces_demo)
         # load demonstrations
         with open(self.workspace.traces_demo, 'w', 'utf8') as fout:     # pylint: disable=no-member
             # NOTE: this may be an empty list for some tasks
@@ -115,6 +116,8 @@ class MiniWoBTrainingRun(TorchTrainingRun):
                     config.env.subdomain, config.demonstrations.base_dir,
                     config.demonstrations.parser, logfile=fout,
                     min_raw_reward=config.demonstrations.min_raw_reward)
+
+            # print(self._demonstrations)
 
             # keep a random subset of demonstrations
             with random_seed(0):
@@ -292,6 +295,7 @@ class MiniWoBTrainingRun(TorchTrainingRun):
                     break
 
             # save neural policy
+
             if control_step % config.log.save == 0 and control_step != 0:
                 print('Saving checkpoint')
                 self.checkpoints.save(self.train_state)

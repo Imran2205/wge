@@ -2,7 +2,7 @@ gamma = 1.0
 discount_negative_reward = False
 
 train {
-    max_control_steps = 50000  # max iterations of outer train loop
+    max_control_steps = 2000  # max iterations of outer train loop
     learning_rate = 0.001
     behavioral_cloning = False
     replay = 5  # perform a round of replay every X control steps
@@ -35,7 +35,7 @@ log {
     trace_explore = 1000  # Traces for exploration, must be divisible by log.explore
     trace_replay = 1000  # Traces for replay, must be divisible by log.replay
 
-    save = 1000000000  # save every X steps
+    save = 500  # save every X steps
     visualize_attention = 100000  # essentially, visualize once per episode
     record_screenshots = False    # whether to record screenshots in trace directory (slow; steal cursor)
 }
@@ -98,8 +98,8 @@ env {
 }
 
 demonstrations {
-  min_raw_reward = 1.0  # minimum reward allowed for demonstration parsing
-  base_dir = 2017-10-16_second-turk
+  min_raw_reward = 0.4  # minimum reward allowed for demonstration parsing
+  base_dir = custom-record
   parser = chunk-shortcut
   max_to_use = 1000000000000  # 1 trillion
 }
