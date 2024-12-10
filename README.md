@@ -80,7 +80,8 @@ flight from San Francisco to New York for Dec 23rd."
 
 - Create a data directory ```mkdir -p /path/to/data``` and set ```export
   $RL_DATA=/path/to/data```. In order for the code to run, ```$RL_DATA```
-  will need to be set to point at this directory.
+  will need to be set to point at this directory. 
+To set the environment variables in windows powershell use `$env:RL_DATA = "/path/to/data"`.
 
 - Next, set up the data directory:
   ```
@@ -99,6 +100,10 @@ Next, run the following command to download MiniWoB++ Demonstrations to `./third
 # Where $REPO_DIR is the path to the root of this Git repository.
 git clone https://github.com/stanfordnlp/miniwob-plusplus-demos.git $REPO_DIR/third-party/miniwob-demos
 export RL_DEMO_DIR=$REPO_DIR/third-party/miniwob-demos/
+
+# To set envarionment variables in windows powershell use:
+$env:REPO_DIR = "[path_to_wge_dir]\wge"
+$env:RL_DEMO_DIR = "[path_to_wge_dir]\third-party\miniwob-demos\"
 ```
 
 ### MiniWoB setup
@@ -110,7 +115,11 @@ export RL_DEMO_DIR=$REPO_DIR/third-party/miniwob-demos/
      export the following to the `MINIWOB_BASE_URL` environment variable:
      ```
        export MINIWOB_BASE_URL='http://localhost:8765/'
+     
+       # To set envarionment variables in windows powershell use:
+       $env:MINIWOB_BASE_URL = "http://localhost:8765/"
      ```
+     **N.B. Windows user please use `http-serve.bat` file instead of `http-serve` to run the server**
   2. **Use the `file://` protocol:**
     Open `miniwob-sandbox/html/` in the browser,
     and then export the URL to the `MINIWOB_BASE_URL` environment variable:
