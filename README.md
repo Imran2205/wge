@@ -102,8 +102,8 @@ git clone https://github.com/stanfordnlp/miniwob-plusplus-demos.git $REPO_DIR/th
 export RL_DEMO_DIR=$REPO_DIR/third-party/miniwob-demos/
 
 # To set envarionment variables in windows powershell use:
-$env:REPO_DIR = "[path_to_wge_dir]\wge"
-$env:RL_DEMO_DIR = "[path_to_wge_dir]\third-party\miniwob-demos\"
+$env:REPO_DIR = "\path\to\wge"
+$env:RL_DEMO_DIR = "\path\to\wge\third-party\miniwob-demos\"
 ```
 
 ### MiniWoB setup
