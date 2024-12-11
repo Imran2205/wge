@@ -5,8 +5,6 @@
 Source code accompanying our ICLR 2018 paper:  
 [**Reinforcement Learning on Web Interfaces using Workflow-Guided Exploration**](https://arxiv.org/abs/1802.08802)  
 
-Reproducible experiments using this code are located on [our Codalab
-worksheet](https://worksheets.codalab.org/worksheets/0x0f25031bd42f4aabbc17625fe1484066/).
 
 ## Purpose
 
@@ -18,13 +16,18 @@ flight from San Francisco to New York for Dec 23rd."
 
 ### General setup
 - Python 
-  - Create a conda environment with Python v3.8
+  - Install  virtualenv
   ```shell
-  conda create -n wge python=3.8
+  pip3 install virtualenv
   ```
-  - Activate the conda environment
+  - Create a virtual environment named p5
   ```shell
-  conda activate wge
+  cd path/to/wge
+  python3 -m venv p5
+  ```
+  - Activate the virtualenv
+  ```shell  
+  source p5/bin/activate
   ```
 - Python dependencies
   ```
@@ -33,46 +36,7 @@ flight from San Francisco to New York for Dec 23rd."
   - If this gives you problems, try again and add pip's ```--ignore-installed```
   flag.
 
-- Node and npm
-  - Make sure Node and npm are installed. If they 
-  are, ```node -v``` and ```npm -v``` should print version numbers.
-  - To install Node and npm in macOS use
-    ```shell
-    brew install node
-    ```
-    - If brew is not installed, please follow the installation instructions on [brew website](https://brew.sh/).
-  - To install Node and npm on Linux machines use
-    ```shell
-    sudo apt install nodejs
-    sudo apt install npm
-    ```
-  - On Windows, Node and npm can be installed via the prebuilt installer from the [nodejs website](https://nodejs.org/en/download/prebuilt-installer)
-- PyTorch
-  - Install [PyTorch v1.13.1](https://pytorch.org/get-started/previous-versions/#v1131). Depending on OS type, use any of the following commands.
-    - macOS
-    ```shell
-    conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 -c pytorch
-    ```
-    - Linux and Windows
-    ```
-    # CUDA 11.6
-    conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
-    # CUDA 11.7
-    conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
-    # CPU Only
-    conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 cpuonly -c pytorch
-    ```
-
-- Selenium
-  - Install selenium from `conda-forge`
-  ```
-  conda install conda-forge::selenium
-  ```
-  - Alternatively, you can install selenium using `pip`
-  ```
-  pip install selenium
-  ```
-
+  
 ### Data directory setup
 
 - This code depends on the environmental variable ```$RL_DATA``` being set,
@@ -86,12 +50,14 @@ To set the environment variables in windows powershell use `$env:RL_DATA = "/pat
 - Next, set up the data directory:
   ```
   cd $RL_DATA
-  # Download glove from https://nlp.stanford.edu/data/glove.6B.zip and place
-  # in current directory however you want
-  # Suggested: wget https://nlp.stanford.edu/data/glove.6B.zip
-  # If wget is not installed, you can install it on macOS using: brew install wget.
-  unzip -d glove glove.6B.zip
+  # Download glove from https://nlp.stanford.edu/data/glove.6B.zip and place in current directory however you want  
   ```
+
+
+export REPO_DIR=/Users/smb/Documents/code/gym/wge/
+export RL_DATA=/Users/smb/Documents/code/gym/wge/data/
+export RL_DEMO_DIR=/Users/smb/Documents/code/gym/miniwob-plusplus-master/miniwob/scripts/out/
+export MINIWOB_BASE_URL='http://localhost:8080/' 
 
 ### Demonstration directory setup
 First, set the environment variable `$REPO_DIR` to point to the root of this Git repository. 
@@ -121,20 +87,12 @@ $env:RL_DEMO_DIR = "\path\to\wge\third-party\miniwob-demos\"
      ```
      
      **N.B. Windows user please use `http-serve.bat` file instead of `http-serve` to run the server.**
-  2. **Use the `file://` protocol:**
-    Open `miniwob-sandbox/html/` in the browser,
-    and then export the URL to the `MINIWOB_BASE_URL` environment variable:
-       ```
-       export MINIWOB_BASE_URL='file:///path/to/miniwob-sandbox/html/'
-       ```
+  
 - Once you've followed one of the steps above, test `MiniWoBEnvironment` by running
   ```
   pytest wge/tests/miniwob/test_environment.py -s
   ```
 
-### MiniWoB versions of FormWoB
-
-Follow the "Run a simple server" instruction in the MiniWoB setup section above.
 
 ## Launching an Experiment
 Each time you open a new terminal to run an experiment, set these environment variables:
