@@ -27,7 +27,13 @@ class Saver(object):
         task_name = data['taskName']
         filename = (task_name + '_' + 
                 time.strftime('%m%d%H%M%S', time.gmtime()) + '.json')
-        filename = os.path.join(self.outdir, filename)
+
+        task_folder = os.path.join(self.outdir, task_name)
+        if not os.path.exists(task_folder):
+            os.makedirs(task_folder)
+
+        filename = os.path.join(self.outdir, task_name, filename)
+
         while os.path.exists(filename):
             # Avoid collision
             filename += 'x'
@@ -104,6 +110,9 @@ def main():
     parser.add_argument('-g', '--global-access', action='store_true',
             help='Allow global access to the server')
     args = parser.parse_args()
+
+    if args.outdir == '':
+        args.outdir = './out'
 
     saver.init_directory(args.outdir)
 
