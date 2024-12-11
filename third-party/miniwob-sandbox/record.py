@@ -105,14 +105,14 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--port', default=8032,
             help='Open the connection at this port')
-    parser.add_argument('outdir',
+    parser.add_argument('-o', '--outdir', default='./out',
             help='Directory to dump the demonstrations')
     parser.add_argument('-g', '--global-access', action='store_true',
             help='Allow global access to the server')
     args = parser.parse_args()
 
-    if args.outdir == '':
-        args.outdir = './out'
+    if not os.path.isdir(args.outdir):
+        os.mkdir(args.outdir)
 
     saver.init_directory(args.outdir)
 
