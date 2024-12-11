@@ -114,7 +114,7 @@ def main():
     args.outdir = os.path.join(args.outdir, 'custom-record')
 
     if not os.path.isdir(args.outdir):
-        os.mkdir(args.outdir)
+        os.makedirs(args.outdir)
 
     saver.init_directory(args.outdir)
 
