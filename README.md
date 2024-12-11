@@ -58,7 +58,7 @@ flight from San Francisco to New York for Dec 23rd."
 `file:///path/to/wge/miniwob-sandbox/html/miniwob/social-media.html?record=true`
 - Record 10 demonstrations for each environment (30 total recordings).
 
-#### Viewing Recordings
+#### View your Recordings
 - Ensure the recording server is still running.
 - Open the viewer:
   - Press Cmd+O (Mac) or Ctrl+O (Windows)
@@ -67,104 +67,61 @@ flight from San Francisco to New York for Dec 23rd."
   - The address should look like: `file:///path/to/wge/miniwob-sandbox/viewer/viewer.html`
   - Your recordings will appear in the left panel.
 
-### Data directory setup
-- Download glove from https://nlp.stanford.edu/data/glove.6B.zip and place it in the `wge/data` directory after extraction
-- Next update the following environment variables
+
+### Setup for `data` directory 
+- Download `glove` from `https://nlp.stanford.edu/data/glove.6B.zip` and place it in the `wge/data` directory after extraction
+
+
+### Setup for model training
+- Run miniwob server: go to `path/to/wge/miniwob-sandbox/html/` and run the supplied `http-serve`.
+     - For Mac, use
+     ```
+       cd path/to/wge/miniwob-sandbox/html/
+       ./http-serve
+     ```
+    - For Windows, use
+    ```
+      cd path\to\wge\miniwob-sandbox\html\
+      .\http-serve.bat
+    ```
+- The server should be running at `http://localhost:8080/`
+- Next, set the environment variables:
+  - For Mac, each time you open a new terminal to run an experiment, set these environment variables:
   ```shell
-  export REPO_DIR=/path/to/wge/
-  export RL_DATA=/path/to/wge/data/
-  export RL_DEMO_DIR=/path/to/miniwob-plusplus-master/miniwob/scripts/out/
-  export MINIWOB_BASE_URL='http://localhost:8080/' 
+    export REPO_DIR=/path/to/wge/
+    export RL_DATA=/path/to/wge/data/
+    export RL_DEMO_DIR=/path/to/wge//path/to/miniwob-sandbox/out/
+    export MINIWOB_BASE_URL='http://localhost:8080/' 
   ```
-
-### Demonstration directory setup
-First, set the environment variable `$REPO_DIR` to point to the root of this Git repository. 
-Next, run the following command to download MiniWoB++ Demonstrations to `./third-party/miniwob-demos`:
-```
-# Where $REPO_DIR is the path to the root of this Git repository.
-git clone https://github.com/stanfordnlp/miniwob-plusplus-demos.git $REPO_DIR/third-party/miniwob-demos
-export RL_DEMO_DIR=$REPO_DIR/third-party/miniwob-demos/
-
-# To set envarionment variables in windows powershell use:
-$env:REPO_DIR = "\path\to\wge"
-$env:RL_DEMO_DIR = "\path\to\wge\third-party\miniwob-demos\"
-```
-
-### MiniWoB setup
-
-- There are 2 ways to access MiniWoB tasks:
-  1. **Run a simple server:** go to `miniwob-sandbox/html/` and run the supplied `http-serve`.
-     - The tasks should now be accessible at `http://localhost:8080/miniwob/`
-     - To use a different port (say 8765), run `http-serve 8765`, and then
-     export the following to the `MINIWOB_BASE_URL` environment variable:
-     ```
-       export MINIWOB_BASE_URL='http://localhost:8765/'
-     
-       # To set envarionment variables in windows powershell use:
-       $env:MINIWOB_BASE_URL = "http://localhost:8765/"
-     ```
-     
-     **N.B. Windows user please use `http-serve.bat` file instead of `http-serve` to run the server.**
+  - For Windows, each time you open a new command line to run an experiment, set these environment variables:
+  ```shell
+    $env:REPO_DIR="\path\to\wge\"
+    $env:RL_DATA="\path\to\wge\data\"
+    $env:RL_DEMO_DIR="\path\to\wge\path\to\miniwob-sandbox\out\"
+    $env:MINIWOB_BASE_URL="http:\\localhost:8080\" 
+  ```  
   
-- Once you've followed one of the steps above, test `MiniWoBEnvironment` by running
+- Once you've followed the above steps, test `MiniWoBEnvironment` by running
   ```
+  cd /path/to/wge/
   pytest wge/tests/miniwob/test_environment.py -s
   ```
 
-
-## Launching an Experiment
-Each time you open a new terminal to run an experiment, set these environment variables:
-
-```shell
-export RL_DATA=/path/to/data
-export REPO_DIR=/path/to/wge/repository
-export RL_DEMO_DIR=$REPO_DIR/third-party/miniwob-demos
-export MINIWOB_BASE_URL='http://localhost:8080/' # replace with your port number
+## Train a model
+- To train a model on a task, say 'email-inbox-forward-nl', run:
 ```
-Also, the MiniWoB server must be running on the port specified in the `$MINIWOB_BASE_URL` environment variable. 
-If the server isn't running, follow the "Run a simple server" instruction in the MiniWoB setup section above to 
-start it.
-
-To train a model on a task, run:
+python main.py configs/default-base.txt --task email-inbox-forward-nl
 ```
-python main.py configs/default-base.txt --task click-tab-2
-```
-- This executes the main entrypoint script, `main.py`. In particular, we pass it a base HOCON format config file and the task click-tab-2.
-- Additional configs can be merged in by passing them as commandline arguments
-  from configs/config-mixins
-- Make sure that the following environmental variables are set:
-  `MINIWOB_BASE_URL`, `RL_DEMO_DIR`, `REPO_DIR`.
-- You may also want to set the `PYTHONPATH` to the same place as `REPO_DIR` to
-  make imports work out properly
-- You can also run this via docker by first running `python run_docker.py` to
-  launch Docker and then running the above command. Unfortunately, you will
-not be able to see the model train in the Docker container.
-- The different tasks can be found in the subdirectories of
-  third-party/miniwob-sandbox/html
+- Change the task name (the last parameter) to train for other tasks.
 
-If the script is working, you should see several Chrome windows pop up 
-(operated by Selenium) and a training progress bar in the terminal.
 
 ## Experiment management
-
-All training runs are managed by the `MiniWoBTrainingRuns` object. For example,
-to get training run #141, do this:
-```python
-runs = MiniWoBTrainingRuns()
-run = runs[141]  # a MiniWoBTrainingRun object
-```
-
-A `TrainingRun` is responsible for constructing a model, training it, saving it
-and reloading it (see superclasses `gtd.ml.TrainingRun` and
-`gtd.ml.TorchTrainingRun` for details.)
-
-The most important methods on `MiniWobTrainingRun` are:
-- `__init__`: the policy, the environment, demonstrations, etc, are all loaded
-here.
-- `train`: actual training of the policy happens here
+- All training runs are managed by the `MiniWoBTrainingRuns` object.
+- The most important methods on `MiniWobTrainingRun` are:
+  - `__init__`: the policy, the environment, demonstrations, etc, are all loaded here.
+  - `train`: actual training of the policy happens here
 
 ## Model architecture
-
 During training, there are several key systems involved:
 - the environment
 - policies
@@ -176,7 +133,6 @@ During training, there are several key systems involved:
 - the replay buffer
 
 ### Environment
-
 All environments implement the `Environment` interface. A policy interacts
 with the environment by calling the environment's `step` method and passing in
 actions.
@@ -184,10 +140,8 @@ actions.
 Note that an environment object is _batched_. It actually represents a batch
 of environments, each running in parallel (so that we can train faster).
 
-We mostly use `MiniWoBEnvironment` and `FormWoBEnvironment`.
 
 ### Policies
-
 See the `Policy` interface. The most important methods are `act`,
 `update_from_episodes` and `update_from_replay_buffer`.
 
@@ -198,18 +152,15 @@ The model policy is the main one that we are trying to train. See
 `MiniWoBPolicy` as an example.
 
 ### Episode generators
-
 See the `EpisodeGenerator` interface. An `EpisodeGenerator` runs a
 `Policy` on an `Environment` to produce an `Episode`.
 
 ### Replay buffer
-
 See the `ReplayBuffer` interface. A `ReplayBuffer` stores episodes produced
 by the exploration policy. The final model policy is trained off episodes
 sampled from the replay buffer.
 
 ## Configuration
-
 All configs are in the `configs` folder. They are specified in HOCON format.
 The arguments to `main.py` should be a list of paths to config files.
 `main.py` then merges these config files according to the
