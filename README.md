@@ -39,25 +39,17 @@ flight from San Francisco to New York for Dec 23rd."
   
 ### Data directory setup
 
-- This code depends on the environmental variable ```$RL_DATA``` being set,
-  pointing to a configured data directory.
-
-- Create a data directory ```mkdir -p /path/to/data``` and set ```export
-  $RL_DATA=/path/to/data```. In order for the code to run, ```$RL_DATA```
-  will need to be set to point at this directory. 
-To set the environment variables in windows powershell use `$env:RL_DATA = "/path/to/data"`.
-
-- Next, set up the data directory:
+- Create a folder name `data` inside `wge` directory
+- Download glove from https://nlp.stanford.edu/data/glove.6B.zip and place it in the `data` directory after extraction
+- Next update the following environment variables
   ```
-  cd $RL_DATA
-  # Download glove from https://nlp.stanford.edu/data/glove.6B.zip and place in current directory however you want  
+  export REPO_DIR=/path/to/wge/
+  export RL_DATA=/path/to/wge/data/
+  export RL_DEMO_DIR=/path/to/miniwob-plusplus-master/miniwob/scripts/out/
+  export MINIWOB_BASE_URL='http://localhost:8080/' 
   ```
 
 
-export REPO_DIR=/Users/smb/Documents/code/gym/wge/
-export RL_DATA=/Users/smb/Documents/code/gym/wge/data/
-export RL_DEMO_DIR=/Users/smb/Documents/code/gym/miniwob-plusplus-master/miniwob/scripts/out/
-export MINIWOB_BASE_URL='http://localhost:8080/' 
 
 ### Demonstration directory setup
 First, set the environment variable `$REPO_DIR` to point to the root of this Git repository. 
