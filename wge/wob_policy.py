@@ -622,7 +622,8 @@ class MiniWoBPolicy(Policy, metaclass=abc.ABCMeta):
         take_grad_step(loss)
 
         replay_trace = ReplayBufferUpdateTrace(scored_episodes, importance_weights, model_probs, gamma, sample_trace)
-        return loss.data.sum(), replay_trace
+
+        return loss.data.sum().cpu().numpy().astype(float), replay_trace
 
     def update_from_episodes(self, episodes, gamma, take_grad_step):
         """Implements the REINFORCE loss, adjusted for sampling from the

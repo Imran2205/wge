@@ -8,7 +8,7 @@ train {
     replay = 5  # perform a round of replay every X control steps
     replay_steps = 30  # number of grad steps to take for each round of replay
     reinforce_program = True  # whether to REINFORCE update program policy
-    reinforce_neural = False  # whether to REINFORCE update neural policy
+    reinforce_neural = True  # whether to REINFORCE update neural policy
 }
 
 explore {

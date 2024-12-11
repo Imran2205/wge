@@ -380,6 +380,7 @@ class MiniWoBTrainingRun(TorchTrainingRun):
         for _ in tqdm(list(range(self._replay_steps)), desc=progress_msg):
             replay_loss, replay_trace = policy.update_from_replay_buffer(
                 self._replay_buffer, self._gamma, take_grad_step)
+            # print(replay_loss)
 
         if log:
             self._replay_logger(buff_size, buff_status, replay_loss,
