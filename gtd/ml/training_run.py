@@ -61,7 +61,7 @@ class TrainingRun(object, metaclass=ABCMeta):
             raise RuntimeError('A commit has already been recorded.')
 
         self.metadata['dirty_repo'] = repo.is_dirty()
-        self.metadata['commit'] = repo.head.object.hexsha.encode('utf-8')
+        self.metadata['commit'] = repo.head.object.hexsha  # .encode('utf-8')
 
     def dump_diff(self, src_dir):
         patch_dir = self.workspace.git_patches
@@ -101,6 +101,8 @@ class TrainingRun(object, metaclass=ABCMeta):
         Args:
             src_dir (str): path to the Git repository
         """
+
+        # print(src_dir)
         if self.metadata['dirty_repo']:
             raise EnvironmentError('Working directory was dirty when commit was recorded.')
 
@@ -108,7 +110,7 @@ class TrainingRun(object, metaclass=ABCMeta):
         if repo.is_dirty():
             raise EnvironmentError('Current working directory is dirty.')
 
-        current_commit = repo.head.object.hexsha.encode('utf-8')
+        current_commit = repo.head.object.hexsha  # .encode('utf-8')
         run_commit = self.metadata['commit']
         if current_commit != run_commit:
             raise EnvironmentError("Commits don't match.\nCurrent: {}\nRecorded: {}".format(current_commit, run_commit))
@@ -141,6 +143,7 @@ class TrainingRuns(Mapping):
         save_dir = self._int_dirs[i]
         config = Config.from_file(self._config_path(save_dir))
         run = self._run_factory(config, save_dir)
+        # print("+++++++", self._src_dir, self._check_commit)
         if self._check_commit:
             run.match_commit(self._src_dir)
 

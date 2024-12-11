@@ -55,7 +55,7 @@ class TrainState(object):
 
     @classmethod
     def load(cls, path, model, optimizer):
-        with open(join(path, 'metadata.p'), 'r') as f:
+        with open(join(path, 'metadata.p'), 'rb') as f:
             d = pickle.load(f)
 
         # load model
@@ -116,6 +116,7 @@ class Checkpoints(object):
     def save(self, train_state):
         """Save TrainState."""
         ckpt_path = join(self._path, '{}.checkpoint'.format(train_state.train_steps))
+        # print(ckpt_path)
         train_state.save(ckpt_path)
 
     def load_latest(self, model, optimizer):

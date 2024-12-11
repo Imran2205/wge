@@ -111,6 +111,7 @@ class Metadata(MutableMapping):
         if fmt == 'hocon':
             config_tree = ConfigFactory.parse_file(path)
         elif fmt == 'json':
+            print("##"*20, path)
             with open(path, 'r') as f:
                 d = json.load(f)
             config_tree = ConfigFactory.from_dict(d)

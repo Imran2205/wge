@@ -39,6 +39,8 @@ torch.manual_seed(args.seed)
 # create run
 runs = MiniWoBTrainingRuns(check_commit=(args.check_commit == 'strict'))
 
+# print("*"*40, len(runs))
+
 config_paths = args.config_paths
 if len(config_paths) == 1 and config_paths[0].isdigit():
     # reload old run

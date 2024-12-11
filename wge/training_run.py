@@ -295,9 +295,9 @@ class MiniWoBTrainingRun(TorchTrainingRun):
                     break
 
             # save neural policy
-
+            # print(">>>>", control_step)
             if control_step % config.log.save == 0 and control_step != 0:
-                print('Saving checkpoint')
+                print(f'Saving checkpoint')
                 self.checkpoints.save(self.train_state)
 
 
