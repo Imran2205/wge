@@ -36,27 +36,46 @@ flight from San Francisco to New York for Dec 23rd."
   - If this gives you problems, try again and add pip's ```--ignore-installed```
   flag.
 
-### Record your demonstration
-- Go to `miniwob-sandbox` folder and run the recording script. Your recordings will be available in the `out` folder, which is under the `miniwob-sandbox` folder
+### Setup for recording
+- Go to `miniwob-sandbox` folder and run the recording script from the terminal or command line. 
 
   ```
   cd miniwob-sandbox
-  python record.py out   
+  python record.py
   ```
-  
-### Data directory setup
+- If everything works out, you should see the message: `Listening on http://localhost:8032/`.
 
-- Create a folder name `data` inside `wge` directory
-- Download glove from https://nlp.stanford.edu/data/glove.6B.zip and place it in the `data` directory after extraction
+#### Record your demonstration
+- Open your browser and enter `http://localhost:8032/` in the address bar. You'll see an "Error: 404 Not Found" message, indicating the server is working correctly.
+- Open the task environment:
+  - Press Cmd+O (Mac) or Ctrl+O (Windows)
+  - Navigate to `miniwob-sandbox/html/miniwob`
+  - Select an environment file (choose from):
+    - `click-checkboxes-soft.html`
+    - `email-inbox-forward-nl.html`
+    - `social-media.html`
+- To begin recording, append `?record=true` to the URL in your address bar. For example:
+`file:///path/to/wge/miniwob-sandbox/html/miniwob/social-media.html?record=true`
+- Record 10 demonstrations for each environment (30 total recordings).
+
+#### Viewing Recordings
+- Ensure the recording server is still running.
+- Open the viewer:
+  - Press Cmd+O (Mac) or Ctrl+O (Windows)
+  - Navigate to `miniwob-sandbox/viewer`
+  - Select `viewer.html`
+  - The address should look like: `file:///path/to/wge/miniwob-sandbox/viewer/viewer.html`
+  - Your recordings will appear in the left panel.
+
+### Data directory setup
+- Download glove from https://nlp.stanford.edu/data/glove.6B.zip and place it in the `wge/data` directory after extraction
 - Next update the following environment variables
-  ```
+  ```shell
   export REPO_DIR=/path/to/wge/
   export RL_DATA=/path/to/wge/data/
   export RL_DEMO_DIR=/path/to/miniwob-plusplus-master/miniwob/scripts/out/
   export MINIWOB_BASE_URL='http://localhost:8080/' 
   ```
-
-
 
 ### Demonstration directory setup
 First, set the environment variable `$REPO_DIR` to point to the root of this Git repository. 
