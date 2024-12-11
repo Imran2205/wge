@@ -90,7 +90,7 @@ flight from San Francisco to New York for Dec 23rd."
   ```shell
     export REPO_DIR=/path/to/wge/
     export RL_DATA=/path/to/wge/data/
-    export RL_DEMO_DIR=/path/to/wge//path/to/miniwob-sandbox/out/
+    export RL_DEMO_DIR=/path/to/wge/path/to/miniwob-sandbox/out/
     export MINIWOB_BASE_URL='http://localhost:8080/' 
   ```
   - For Windows, each time you open a new command line to run an experiment, set these environment variables:
