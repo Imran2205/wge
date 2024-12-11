@@ -36,6 +36,13 @@ flight from San Francisco to New York for Dec 23rd."
   - If this gives you problems, try again and add pip's ```--ignore-installed```
   flag.
 
+### Record your demonstration
+- Go to `miniwob-sandbox` folder and run the recording script. Your recordings will be available in the `out` folder, which is under the `miniwob-sandbox` folder
+
+  ```
+  cd miniwob-sandbox
+  python record.py out   
+  ```
   
 ### Data directory setup
 
