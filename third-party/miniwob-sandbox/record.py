@@ -111,6 +111,8 @@ def main():
             help='Allow global access to the server')
     args = parser.parse_args()
 
+    args.outdir = os.path.join(args.outdir, 'custom-record')
+
     if not os.path.isdir(args.outdir):
         os.mkdir(args.outdir)
 
