@@ -25,9 +25,14 @@ flight from San Francisco to New York for Dec 23rd."
   cd path/to/wge
   python3 -m venv p5
   ```
-  - Activate the virtualenv
+  - Activate the virtualenv for MAC
   ```shell  
   source p5/bin/activate
+  ```
+
+  - Activate the virtualenv for Windows
+  ```shell  
+  source p5\Scripts\activate.bat
   ```
 - Python dependencies
   ```
