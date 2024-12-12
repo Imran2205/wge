@@ -13,7 +13,7 @@ things in a browser that can be specified in natural language, e.g. "Book a
 flight from San Francisco to New York for Dec 23rd."
 
 ## Setup
-
+- We tested the system with Python 3.9 (e.g., 3.9.3 on Mac and  3.9.13 on Windows)
 ### General setup
 - Python 
   - Install  virtualenv
