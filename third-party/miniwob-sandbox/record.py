@@ -14,6 +14,7 @@ from bottle import Bottle, request, response
 app = Bottle()
 
 import base64, zlib, gzip
+import glob
 
 class Saver(object):
     outdir = None
@@ -69,7 +70,12 @@ class Saver(object):
             return json.load(fin)
 
     def list_files(self):
-        return sorted(os.listdir(self.outdir))
+        files = glob.glob(os.path.join(os.path.abspath(self.outdir), '*/*.json*'))
+        # print(os.path.abspath(self.outdir), files)
+        # files_final = [f.replace(str(self.outdir), '') for f in files]
+        # print(files_final)
+        return files
+        # return sorted(os.listdir(self.outdir))
 
 saver = Saver()
 
