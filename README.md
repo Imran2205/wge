@@ -13,7 +13,7 @@ things in a browser that can be specified in natural language, e.g. "Book a
 flight from San Francisco to New York for Dec 23rd."
 
 ## Setup
-
+- We tested the system with Python 3.9 (e.g., 3.9.3 on Mac and  3.9.13 on Windows)
 ### General setup
 - Python 
   - Install  virtualenv
@@ -25,9 +25,14 @@ flight from San Francisco to New York for Dec 23rd."
   cd path/to/wge
   python3 -m venv p5
   ```
-  - Activate the virtualenv
+  - Activate the virtualenv for MAC
   ```shell  
   source p5/bin/activate
+  ```
+
+  - Activate the virtualenv for Windows
+  ```shell  
+  .\p5\Scripts\activate.bat
   ```
 - Python dependencies
   ```
@@ -37,10 +42,16 @@ flight from San Francisco to New York for Dec 23rd."
   flag.
 
 ### Setup for recording
-- Go to `miniwob-sandbox` folder and run the recording script from the terminal or command line. 
+- (MAC) Go to `miniwob-sandbox` folder and run the recording script from the terminal or command line . 
 
   ```
   cd miniwob-sandbox
+  python record.py
+  ```
+- (Windows) The `miniwob-sandbox` folder is a link, which may not work in Window. If that is the case, use the full path `third-party\miniwob-sandbox`, and run the recording script from the command line. 
+
+  ```
+  cd third-party\miniwob-sandbox
   python record.py
   ```
 - If everything works out, you should see the message: `Listening on http://localhost:8032/`.
