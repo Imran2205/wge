@@ -32,7 +32,7 @@ flight from San Francisco to New York for Dec 23rd."
 
   - Activate the virtualenv for Windows
   ```shell  
-  source p5\Scripts\activate.bat
+  .\p5\Scripts\activate.bat
   ```
 - Python dependencies
   ```
