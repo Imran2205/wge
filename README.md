@@ -42,10 +42,16 @@ flight from San Francisco to New York for Dec 23rd."
   flag.
 
 ### Setup for recording
-- Go to `miniwob-sandbox` folder and run the recording script from the terminal or command line. 
+- (MAC) Go to `miniwob-sandbox` folder and run the recording script from the terminal or command line . 
 
   ```
   cd miniwob-sandbox
+  python record.py
+  ```
+- (Windows) The `miniwob-sandbox` folder is a link, which may not work in Window. If that is the case, use the full path `third-party\miniwob-sandbox`, and run the recording script from the command line. 
+
+  ```
+  cd third-party\miniwob-sandbox
   python record.py
   ```
 - If everything works out, you should see the message: `Listening on http://localhost:8032/`.
