@@ -94,7 +94,7 @@ class BasicEpisodeGenerator(EpisodeGenerator):
             if policy.has_attention and step % self._visualize_attention_interval == 0:
                 env.visualize_attention(policy.action_attention)
 
-            print(actions)
+            # print(actions)
             next_states, rewards, dones, info = env.step(actions)
             assert not env.died, 'Environment died'
 
