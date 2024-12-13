@@ -30,10 +30,15 @@ flight from San Francisco to New York for Dec 23rd."
   source p5/bin/activate
   ```
 
-  - Activate the virtualenv for Windows
+  - Activate the virtualenv for Windows using command line. If you are using Windows Power Shell (PS), see the next instruction.
   ```shell  
   .\p5\Scripts\activate.bat
   ```
+  - Activate the virtualenv for Windows using Powershell (PS)
+  ```shell  
+  .\p5\Scripts\activate.ps1
+  ```
+  
 - Python dependencies
   ```
   pip install -r requirements.txt
