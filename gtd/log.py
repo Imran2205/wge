@@ -4,7 +4,7 @@ import math
 import numbers
 import os
 import platform
-import resource
+# import resource
 import sys
 from collections import MutableMapping
 from contextlib import contextmanager
@@ -41,15 +41,15 @@ def print_with_fonts(tokens, sizes, colors, background=None):
     display(HTML(text))
 
 
-def gb_used():
-    used = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    if platform.system() != 'Darwin':
-        # on Linux, used is in terms of kilobytes
-        power = 2
-    else:
-        # on Mac, used is in terms of bytes
-        power = 3
-    return float(used) / math.pow(1024, power)
+# def gb_used():
+#     used = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+#     if platform.system() != 'Darwin':
+#         # on Linux, used is in terms of kilobytes
+#         power = 2
+#     else:
+#         # on Mac, used is in terms of bytes
+#         power = 3
+#     return float(used) / math.pow(1024, power)
 
 
 class Metadata(MutableMapping):

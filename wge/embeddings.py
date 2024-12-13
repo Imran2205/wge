@@ -98,7 +98,7 @@ class GloveEmbeddings(SimpleEmbeddings):
         # zeros are just placeholders for now
         embeds = [np.zeros(embed_dim, dtype=np.float32) for _ in words]
 
-        with open(glove_path, 'r') as f:
+        with open(glove_path, 'r', encoding='utf-8') as f:
             lines = verboserate(f, desc='Loading GloVe embeddings',
                                 total=vocab_size, initial=num_special)
             for i, line in enumerate(lines, start=num_special):
